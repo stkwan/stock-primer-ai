@@ -1,0 +1,11 @@
+# Ignore the following directories and/or files from git commit
+
+# dependencies
+/node_modules
+
+# dotenv variables
+.env
+
+# misc
+/dist
+.DS_store
