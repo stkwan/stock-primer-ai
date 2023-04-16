@@ -4,4 +4,4 @@ const router = express.Router();
 
 router.get('/:sym', getQuoteInfo);
 
-export { router }
+export default router;
