@@ -28,6 +28,10 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     minlength: 1
   }],
+  purchasingPower: {
+    type: Number,
+    default: 2500000
+  },
   holdings: [
     {type: AssetSchema}
   ]
