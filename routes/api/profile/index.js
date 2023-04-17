@@ -1,36 +1,26 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import ProfileModel from '../../../models/profileModel.js';
+import {
+  createProfile,
+  getAllProfiles,
+  getProfile,
+  updateProfile,
+  deleteProfile } from './handlers.js';
 
 const router = express.Router();
 
 // Create a new profile
-router.post('/new', async (req, res, next) => {
-  if (!req.body.email || !req.body.username) {
-    res.json({error: 'Email and username are required'})
-  }
+router.post('/new', createProfile);
 
-  try {
-    const newProfile = await ProfileModel.create(req.body);
-    return res.json(newProfile);
-  } catch(error) {
-    return res.json({error: error.message});
-  }
-});
+// Get all profiles
+router.get('/all', getAllProfiles);
 
 // Get a profile
-router.get('/:id', (req, res, next) => {
-  res.send(`Get profile with id: ${req.params.id}`);
-});
+router.get('/:id', getProfile);
 
 // Update a profile
-router.patch('/:id', (req, res, next) => {
-  res.send(`Update a profile with id: ${req.params.id}`);
-});
+router.patch('/:id', updateProfile);
 
 // Delete a profile
-router.delete('/:id', (req, res, next) => {
-  res.send(`Delete profile with id ${req.params.id}`)
-});
+router.delete('/:id', deleteProfile);
 
 export default router;
