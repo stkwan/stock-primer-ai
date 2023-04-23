@@ -11,7 +11,7 @@ const createProfile = async function(req, res, next) {
     const newProfile = await ProfileModel.create(req.body);
     return res.json(newProfile);
   } catch (error) {
-    return res.json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -24,7 +24,7 @@ const getAllProfiles = async function(req, res, next) {
     }
     return res.json(allProfiles);
   } catch (error) {
-    return res.json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -39,7 +39,7 @@ const getProfile = async function(req, res, next) {
     }
     return res.json(profile);
   } catch (error) {
-    return res.json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -51,12 +51,34 @@ const updateProfile = async function(req, res, next) {
 
   const sameEmail = await ProfileModel.findOne({ email: updatedEmail });
   if (sameEmail) {
-    return res.json({ error: 'A profile with this email already exists' });
+    return res.status(400).json({ error: 'A profile with this email already exists' });
   }
 
   const sameUsername = await ProfileModel.findOne({ username: updatedUsername });
   if (sameUsername) {
-    return res.json({ error: 'A profile with this username already exists' });
+    return res.status(400).json({ error: 'A profile with this username already exists' });
+  }
+
+  // Provided symbol is less than 1 character
+  if (req.body.watchlist.includes('')) {
+    return res.status(400).json({error: 'Symbol must contain at least one letter'});
+  }
+
+  // Provided symbol is already on the list
+  const watchListLength = req.body.watchlist.length;
+  let sym;
+  if (watchListLength > 0) {
+    sym = req.body.watchlist[watchListLength - 1];
+  }
+  if (req.body.watchlist.slice(0, watchListLength - 1).includes(sym.toUpperCase())) {
+    return res.status(400).json({error: 'This symbol is already on your watchlist'});
+  }
+
+  // Provided symbol is not a valid symbol
+  try {
+    await validSymbol(sym);
+  } catch(err) {
+    return res.status(400).json({ error: 'Symbol does not exist' });
   }
 
   try {
@@ -66,7 +88,7 @@ const updateProfile = async function(req, res, next) {
     }
     return res.json(profile);
   } catch (error) {
-    return res.json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -80,7 +102,19 @@ const deleteProfile = async function(req, res, next) {
     }
     return res.json(profile);
   } catch (error) {
-    return res.json({ error: error.message });
+    return res.status(400).json({ error: error.message });
+  }
+};
+
+const validSymbol = async function (symbol) {
+  const res = await fetch(`http://localhost:3000/api/quote/${symbol}`);
+  if (res.ok) {
+    const quote = await res.json();
+    if (!quote.data.c) {
+      return Promise.reject(false);
+    } else {
+      return Promise.resolve(true);
+    }
   }
 };
 
