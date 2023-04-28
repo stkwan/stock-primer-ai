@@ -24,10 +24,9 @@ const ProfileSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  watchlist: [{
-    type: String,
-    minlength: 1
-  }],
+  watchlist: [
+    String
+  ],
   purchasingPower: {
     type: Number,
     default: 2500000

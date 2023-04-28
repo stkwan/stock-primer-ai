@@ -58,7 +58,8 @@ const updateProfile = async function(req, res, next) {
   if (sameUsername) {
     return res.status(400).json({ error: 'A profile with this username already exists' });
   }
-
+  
+if (req.body.watchlist !== undefined) {
   // Provided symbol is less than 1 character
   if (req.body.watchlist.includes('')) {
     return res.status(400).json({error: 'Symbol must contain at least one letter'});
@@ -80,6 +81,7 @@ const updateProfile = async function(req, res, next) {
   } catch(err) {
     return res.status(400).json({ error: 'Symbol does not exist' });
   }
+}
 
   try {
     const profile = await ProfileModel.findByIdAndUpdate(id, req.body);
