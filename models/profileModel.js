@@ -6,6 +6,17 @@ const AssetSchema = new mongoose.Schema({
   avgPrice: { type: Number }
 });
 
+const TradeHistorySchema = new mongoose.Schema({
+  symbol: { type: String, minLength: 1},
+  action: { type: String },
+  shares: { type: Number},
+  price: { type: Number},
+  total: {type: Number},
+  dollarPL: { type: Number },
+  percentPL: { type: Number },
+  status: { type: String }
+});
+
 const ProfileSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -33,7 +44,10 @@ const ProfileSchema = new mongoose.Schema({
   },
   holdings: [
     {type: AssetSchema}
-  ]
+  ],
+  tradeHistory: [
+    {type: TradeHistorySchema}
+  ],
 });
 
 const ProfileModel = mongoose.model('Profile', ProfileSchema);
