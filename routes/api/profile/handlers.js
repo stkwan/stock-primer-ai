@@ -59,7 +59,7 @@ const updateProfile = async function(req, res, next) {
     return res.status(400).json({ error: 'A profile with this username already exists' });
   }
   
-if (req.body.watchlist !== undefined) {
+if (req.body.watchlist !== undefined && req.body.watchlist.length > 0) {
   // Provided symbol is less than 1 character
   if (req.body.watchlist.includes('')) {
     return res.status(400).json({error: 'Symbol must contain at least one letter'});
@@ -68,16 +68,17 @@ if (req.body.watchlist !== undefined) {
   // Provided symbol is already on the list
   const watchListLength = req.body.watchlist.length;
   let sym;
-  if (watchListLength > 0) {
+  if (watchListLength > 1) {
     sym = req.body.watchlist[watchListLength - 1];
-  }
-  if (req.body.watchlist.slice(0, watchListLength - 1).includes(sym.toUpperCase())) {
-    return res.status(400).json({error: 'This symbol is already on your watchlist'});
+    if (req.body.watchlist.slice(0, watchListLength - 1).includes(sym.toUpperCase())) {
+      return res.status(400).json({ error: 'This symbol is already on your watchlist' });
+    }
   }
 
   // Provided symbol is not a valid symbol
   try {
-    await validSymbol(sym);
+    console.log(req.body.watchlist[watchListLength - 1]);
+    await validSymbol(req.body.watchlist[watchListLength - 1]);
   } catch(err) {
     return res.status(400).json({ error: 'Symbol does not exist' });
   }

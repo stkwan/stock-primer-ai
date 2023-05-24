@@ -9,11 +9,13 @@ const AssetSchema = new mongoose.Schema({
 const TradeHistorySchema = new mongoose.Schema({
   symbol: { type: String, minLength: 1},
   action: { type: String },
+  orderType: { type: String },
   shares: { type: Number},
   price: { type: Number},
   total: {type: Number},
   dollarPL: { type: Number },
   percentPL: { type: Number },
+  orderDate: { type: String },
   status: { type: String }
 });
 
