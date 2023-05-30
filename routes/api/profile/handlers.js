@@ -4,12 +4,12 @@ import ProfileModel from '../../../models/profileModel.js';
 // Create a new profile
 const createProfile = async function(req, res, next) {
   if (!req.body.email || !req.body.username) {
-    return res.json({ error: 'Email and username are required' })
+    return res.status(400).json({ error: 'Email and username are required' })
   }
 
   try {
     const newProfile = await ProfileModel.create(req.body);
-    return res.json(newProfile);
+    return res.status(200).json(newProfile);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }

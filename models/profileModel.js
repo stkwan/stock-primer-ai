@@ -44,6 +44,10 @@ const ProfileSchema = new mongoose.Schema({
     type: Number,
     default: 2500000
   },
+  latestBalance: {
+    type:Number,
+    min: 0
+  },
   holdings: [
     {type: AssetSchema}
   ],
