@@ -7,16 +7,16 @@ const AssetSchema = new mongoose.Schema({
 });
 
 const TradeHistorySchema = new mongoose.Schema({
-  symbol: { type: String, minLength: 1},
-  action: { type: String },
-  orderType: { type: String },
-  shares: { type: Number},
-  price: { type: Number},
-  total: {type: Number},
+  symbol: { type: String, minLength: 1, required: true},
+  action: { type: String, required: true },
+  orderType: { type: String, required: true },
+  shares: { type: Number, required: true },
+  price: { type: Number, required: true },
+  total: { type: Number, required: true },
   dollarPL: { type: Number },
   percentPL: { type: Number },
-  orderDate: { type: String },
-  status: { type: String }
+  orderDate: { type: String, required: true },
+  status: { type: String, required: true }
 });
 
 const ProfileSchema = new mongoose.Schema({
