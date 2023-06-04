@@ -5,8 +5,12 @@ import {
   getProfile,
   updateProfile,
   deleteProfile } from './handlers.js';
+import requireAuth from '../../../middleware/requireAuth.js';
 
 const router = express.Router();
+
+// Ensure the user is authenticated (logged in) before allowing access to below routes
+router.use(requireAuth);
 
 // Create a new profile
 router.post('/new', createProfile);

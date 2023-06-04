@@ -14,13 +14,17 @@ const getQuoteInfo = async function(req, res, next) {
       }
     });
 
+    let data = await response.json();
+
     if (response.ok) {
-      let data = await response.json();
       res.json({ data });
+    } else {
+      console.log(data);
+      throw Error(data.error);
     }
 
-  } catch (err) {
-    res.status(404).json({ err });
+  } catch (error) {
+    res.status(429).json({ error: error.message });
   }
 }
 
