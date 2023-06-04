@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import UserModel from '../models/userModel.js';
+import ProfileModel from '../models/profileModel.js';
 
 const requireAuth = async (req, res, next) => {
 
@@ -15,7 +15,7 @@ const requireAuth = async (req, res, next) => {
   try {
     const { _id } = jwt.verify(token, process.env.SECRET);
 
-    req.user = await UserModel.findOne({_id}).select(_id);
+    req.user = await ProfileModel.findOne({_id}).select(_id);
 
     return next();
 

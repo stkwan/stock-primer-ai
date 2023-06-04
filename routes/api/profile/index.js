@@ -13,7 +13,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 // Create a new profile
-router.post('/new', createProfile);
+//router.post('/new', createProfile);
 
 // Get all profiles
 router.get('/all', getAllProfiles);

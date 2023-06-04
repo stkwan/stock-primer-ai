@@ -1,5 +1,5 @@
-// import UserModel
-import UserModel from '../../../models/userModel.js';
+// import ProfileModel
+import ProfileModel from '../../../models/profileModel.js';
 import jwt from 'jsonwebtoken';
 
 const createToken = (_id) => {
@@ -11,12 +11,13 @@ const loginUser = async (req, res, next) => {
   const {email, password} = req.body;
 
   try {
-    const user = await UserModel.login(email, password);
+    const user = await ProfileModel.login(email, password);
 
     // create a token
     const token = createToken(user._id);
+    const id = user._id;
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, id, token });
 
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -25,15 +26,16 @@ const loginUser = async (req, res, next) => {
 
 // signup user
 const signUpUser = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, username, password } = req.body;
 
   try {
-    const user = await UserModel.signup(email, password);
-    
+    const user = await ProfileModel.signup(email, username, password);
+
     // create a token
     const token = createToken(user._id);
+    const id = user._id;
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, id, token });
 
   } catch(error) {
     res.status(400).json({ error: error.message});

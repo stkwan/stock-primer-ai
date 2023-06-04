@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import bcrypt from 'bcrypt';
+import validator from 'validator';
 
 const AssetSchema = new mongoose.Schema({
   symbol: { type: String, minLength: 1 },
@@ -28,7 +30,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    minLength: 10,
+    minLength: 8,
     required: true
   },
   username: {
@@ -42,11 +44,12 @@ const ProfileSchema = new mongoose.Schema({
   ],
   purchasingPower: {
     type: Number,
-    default: 2500000
+    default: 10000000
   },
   latestBalance: {
     type:Number,
-    min: 0
+    min: 0,
+    default: 10000000
   },
   holdings: [
     {type: AssetSchema}
@@ -55,6 +58,66 @@ const ProfileSchema = new mongoose.Schema({
     {type: TradeHistorySchema}
   ],
 });
+
+// static signup method
+ProfileSchema.statics.signup = async function (email, username, password) {
+  // Validate that email and pw are not empty strings
+  if (!email || !password) {
+    throw Error('All feilds must be filled');
+  }
+  // Validate email
+  if (!validator.isEmail(email)) {
+    throw Error('Email is not valid');
+  }
+  // Validate that pw is a strong pw
+  if (!validator.isStrongPassword(password)) {
+    throw Error('Password not strong enough');
+  }
+
+  // Ensure email provided is not already in use
+  const exists = await this.findOne({ email });
+  if (exists) {
+    throw Error('This email is already in use');
+  }
+
+  // Ensure username provided is not already in use
+  const userNameExists = await this.findOne({username});
+  if (userNameExists) {
+    throw Error('This username is already in use');
+  }
+
+  // Generate a salt (a random string to concat to password)
+  const salt = await bcrypt.genSalt(10);
+  // Hash the password and salt together
+  const hash = await bcrypt.hash(password, salt);
+
+  // Create the document on the database
+  const user = await this.create({ email, username, password: hash });
+
+  return user;
+}
+
+// static login method
+ProfileSchema.statics.login = async function (email, password) {
+  // Validate that email and pw are not empty strings
+  if (!email || !password) {
+    throw Error('All feilds must be filled');
+  }
+
+  // Check if the email exists in the database
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw Error('Incorrect email');
+  }
+
+  // Email exists, now validate if given password matches hashed password
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    throw Error('Incorrect password');
+  }
+
+  return user;
+}
 
 const ProfileModel = mongoose.model('Profile', ProfileSchema);
 export default ProfileModel;

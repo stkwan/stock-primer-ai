@@ -68,9 +68,9 @@ userSchema.statics.login = async function(email, password) {
   return user;
 }
 
-const UserModel = mongoose.model('User', userSchema);
+//const UserModel = mongoose.model('User', userSchema);
 
-export default UserModel;
+//export default UserModel;
 
 // Notes
 // Use bcrypt package (npm install bcrypt) to hash password
