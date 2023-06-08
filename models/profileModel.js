@@ -21,6 +21,20 @@ const TradeHistorySchema = new mongoose.Schema({
   status: { type: String, required: true }
 });
 
+const FollowSchema = {
+  profile_id: {
+    type: String
+  },
+  username: {
+    type: String,
+    minLength: 1
+  },
+  email: {
+    type: String,
+    minLength: 6
+  }
+}
+
 const ProfileSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -57,6 +71,12 @@ const ProfileSchema = new mongoose.Schema({
   tradeHistory: [
     {type: TradeHistorySchema}
   ],
+  followers: [
+    {type: FollowSchema}
+  ],
+  following: [
+    {type: FollowSchema}
+  ]
 });
 
 // static signup method

@@ -16,8 +16,11 @@ const loginUser = async (req, res, next) => {
     // create a token
     const token = createToken(user._id);
     const id = user._id;
+    const username = user.username;
+    const followers = user.followers;
+    const following = user.following;
 
-    res.status(200).json({ email, id, token });
+    res.status(200).json({ email, id, username, followers, following, token });
 
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -34,8 +37,11 @@ const signUpUser = async (req, res, next) => {
     // create a token
     const token = createToken(user._id);
     const id = user._id;
+    const username = user.username;
+    const followers = user.followers;
+    const following = user.following;
 
-    res.status(200).json({ email, id, token });
+    res.status(200).json({ email, id, username, followers, following, token });
 
   } catch(error) {
     res.status(400).json({ error: error.message});
