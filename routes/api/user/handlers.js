@@ -3,12 +3,12 @@ import ProfileModel from '../../../models/profileModel.js';
 import jwt from 'jsonwebtoken';
 
 const createToken = (_id) => {
-  return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' });
 }
 
 // login user
 const loginUser = async (req, res, next) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
 
   try {
     const user = await ProfileModel.login(email, password);
@@ -17,10 +17,8 @@ const loginUser = async (req, res, next) => {
     const token = createToken(user._id);
     const id = user._id;
     const username = user.username;
-    const followers = user.followers;
-    const following = user.following;
 
-    res.status(200).json({ email, id, username, followers, following, token });
+    res.status(200).json({ email, id, username, token });
 
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -37,14 +35,11 @@ const signUpUser = async (req, res, next) => {
     // create a token
     const token = createToken(user._id);
     const id = user._id;
-    const username = user.username;
-    const followers = user.followers;
-    const following = user.following;
 
-    res.status(200).json({ email, id, username, followers, following, token });
+    res.status(200).json({ email, id, username: user.username, token });
 
-  } catch(error) {
-    res.status(400).json({ error: error.message});
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
