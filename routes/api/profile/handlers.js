@@ -110,7 +110,12 @@ const deleteProfile = async function(req, res, next) {
 };
 
 const validSymbol = async function (symbol) {
-  const res = await fetch(`http://localhost:3000/api/quote/${symbol}`);
+  const res = await fetch('https://finnhub.io/api/v1/quote?symbol=' + symbol, {
+      method: 'GET',
+      headers: {
+        "X-Finnhub-Token": process.env.finnhubAPIKey
+      }
+    });
   if (res.ok) {
     const quote = await res.json();
     if (!quote.data.c) {
