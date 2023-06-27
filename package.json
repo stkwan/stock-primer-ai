@@ -5,7 +5,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node, app.js",
+    "start": "node app.js",
     "app": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +24,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
