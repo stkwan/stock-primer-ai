@@ -28,10 +28,11 @@ app.use('/api/profile', profileRouter);
 app.use('/api/user', userRouter);
 
 // Connect to MongoDB & listen on specified port
+const PORT = process.env.PORT || 3000;
 connectMongo()
   .then((res) => {
-    app.listen(process.env.PORT, () => {
-      console.log(`${res} & listening on port ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`${res} & listening on port ${PORT}`);
     });
   })
   .catch((err) => console.log(err));
