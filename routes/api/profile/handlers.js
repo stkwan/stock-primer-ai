@@ -77,7 +77,7 @@ if (req.body.watchlist !== undefined && req.body.watchlist.length > 0) {
 
   // Provided symbol is not a valid symbol
   try {
-    console.log(req.body.watchlist[watchListLength - 1]);
+    //console.log(req.body.watchlist[watchListLength - 1]);
     await validSymbol(req.body.watchlist[watchListLength - 1]);
   } catch(err) {
     return res.status(400).json({ error: 'Symbol does not exist' });
