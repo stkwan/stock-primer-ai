@@ -77,7 +77,7 @@ if (req.body.watchlist !== undefined && req.body.watchlist.length > 0) {
 
   // Provided symbol is not a valid symbol
   try {
-    //console.log(req.body.watchlist[watchListLength - 1]);
+    console.log(req.body.watchlist[watchListLength - 1]);
     await validSymbol(req.body.watchlist[watchListLength - 1]);
   } catch(err) {
     return res.status(400).json({ error: 'Symbol does not exist' });
@@ -110,12 +110,7 @@ const deleteProfile = async function(req, res, next) {
 };
 
 const validSymbol = async function (symbol) {
-  const res = await fetch('https://finnhub.io/api/v1/quote?symbol=' + symbol, {
-      method: 'GET',
-      headers: {
-        "X-Finnhub-Token": process.env.finnhubAPIKey
-      }
-    });
+  const res = await fetch(`https://primestock-app-a9b2041d8242.herokuapp.com/api/quote/${symbol}`);
   if (res.ok) {
     const quote = await res.json();
     if (!quote.data.c) {
