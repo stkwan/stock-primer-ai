@@ -6,7 +6,7 @@ You are currently viewing the backend code of this application. [The frontend co
 
 ## Description
 
-My enthusiasim for coding and trading was the inspiration for writing this application. The backend of this application uses an Express/NodeJS framework in conjunction with a MongoDB database. It exposes a RESTful API which accepts and returns JSON. Notable implemenations within the backend code include:
+My enthusiasm for coding and trading was the inspiration for writing this application. The backend of this application uses an Express/NodeJS framework in conjunction with a MongoDB database. It exposes a RESTful API which accepts and returns JSON. Notable implementations within the backend code include:
 
 * Cross-Origin Resource Sharing in order to communicate with frontend hosted on a different domain.
 * JSON Web Token in order to implement authentication.
