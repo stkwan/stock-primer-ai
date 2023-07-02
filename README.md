@@ -10,7 +10,7 @@ My enthusiasm for coding and trading was the inspiration for writing this applic
 
 * Cross-Origin Resource Sharing in order to communicate with frontend hosted on a different domain.
 * JSON Web Token in order to implement authentication.
-* Validation of user input prior to writing data on database.
+* Validation of user input prior to saving data on database.
 * Proper use of environment variables to ensure security of API keys, SECRETS, and database URI string.
 * Calls to [finhubb.io](https://finnhub.io/) Stock API to fetch live stock quotes.
 
@@ -19,7 +19,7 @@ My enthusiasm for coding and trading was the inspiration for writing this applic
 ### Dependencies
 
 * Node v18.14.0
-* See pagckage.json for libraries and dependencies
+* See package.json for libraries and dependencies
 
 ### Installing
 
