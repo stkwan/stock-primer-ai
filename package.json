@@ -17,7 +17,7 @@
     "express": "^4.18.2",
     "finnhub": "^1.2.17",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.3",
+    "mongoose": "^7.4.0",
     "validator": "^13.9.0",
     "websocket": "^1.0.34",
     "ws": "^8.13.0"
