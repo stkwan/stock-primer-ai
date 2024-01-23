@@ -44,7 +44,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    minLength: 8,
+    minLength: 6,
     required: true
   },
   username: {
@@ -90,8 +90,8 @@ ProfileSchema.statics.signup = async function (email, username, password) {
     throw Error('Email is not valid');
   }
   // Validate that pw is a strong pw
-  if (!validator.isStrongPassword(password)) {
-    throw Error('Password not strong enough');
+  if (password.length < 6) {
+    throw Error('Password must be at least 6 characters');
   }
 
   // Ensure email provided is not already in use
