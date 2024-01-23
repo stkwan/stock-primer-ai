@@ -2,7 +2,7 @@
 
 ## Description
 
-A stock trading simulator with advanced features to help level up your trading.
+More than just a stock trading simulator! PrimeStock is loaded with advanced features to help you level up.
 
 ## Quick Start
 
