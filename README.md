@@ -1,34 +1,16 @@
-# PrimeStock (Backend)
-
-[PrimeStock](https://primestock.vercel.app/) is a web application for paper trading. [Paper trading](https://en.wikipedia.org/wiki/Stock_market_simulator) is a way to practice trading stocks without having to use real money. It simulates the trading experience and serves to help both new and experienced traders become more disciplined and better traders.
-
-You are currently viewing the backend code of this application. [The frontend code is available here](https://github.com/stkwan/frontend-stock-primer-ai).
+# PrimeStock
 
 ## Description
 
-My enthusiasm for coding and trading was the inspiration for writing this application. The backend of this application uses an Express/NodeJS framework in conjunction with a MongoDB database. It exposes a RESTful API which accepts and returns JSON. Notable implementations within the backend code include:
+A stock trading simulator with advanced features to help level up your trading.
 
-* Cross-Origin Resource Sharing in order to communicate with frontend hosted on a different domain.
-* JSON Web Token in order to implement authentication.
-* Validation of user input prior to saving data on database.
-* Proper use of environment variables to ensure security of API keys, SECRETS, and database URI string.
-* Calls to [finhubb.io](https://finnhub.io/) Stock API to fetch live stock quotes.
+## Quick Start
 
-## Getting Started
+To quickly begin using the application, visit the production website here:
 
-### Dependencies
+[https://primestock.vercel.app/](https://primestock.vercel.app/)
 
-* Node v18.14.0
-* See package.json for libraries and dependencies
-
-### Installing
-
-* In order to run the backend API locally, you must have the following environment variables configured:
-* `Mongo_URI`(https://www.mongodb.com/)
-* `finnhubAPIKey`(https://finnhub.io/)
-* `SECRET` for your JSON Web Token
-
-* To avoid these steps and use the UI you can simply visit the [production application](https://primestock.vercel.app/).
+OR
 
 * To install, enter in the command line:
 
@@ -36,14 +18,20 @@ My enthusiasm for coding and trading was the inspiration for writing this applic
 npm install
 ```
 
-### Executing program
-To run, enter in the command line:
+To run the application locally, enter in the command line:
 
 ```
 npm run app
 ```
 
+## Usage
+1. From the landing page, click "Demo" to skip signing up.
+2. Click the orange "+ Trade" button to start a trade.
+3. Enter a symbol such as "TSLA" and enter your trade details.
+4. Click submit.
+
+You also have the ability to follow other traders, view paginated trade history, see the leaderboard, and create a watchlist!
+
 ## Author
 
 [Steven Kwan](https://github.com/stkwan)
-
