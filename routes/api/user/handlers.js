@@ -27,7 +27,8 @@ const loginUser = async (req, res, next) => {
 
 // signup user
 const signUpUser = async (req, res, next) => {
-  const { email, username, password } = req.body;
+  let { email }  = req.body;
+  const { username, password } = req.body;
 
   try {
     const user = await ProfileModel.signup(email, username, password);
@@ -35,7 +36,7 @@ const signUpUser = async (req, res, next) => {
     // create a token
     const token = createToken(user._id);
     const id = user._id;
-
+    email = user.username;
     res.status(200).json({ email, id, username: user.username, token });
 
   } catch (error) {

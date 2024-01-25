@@ -38,7 +38,7 @@ const FollowSchema = {
 const ProfileSchema = new mongoose.Schema({
   email: {
     type: String,
-    minLength: 6,
+    minLength: 1,
     required: true,
     unique: true
   },
@@ -81,15 +81,13 @@ const ProfileSchema = new mongoose.Schema({
 
 // static signup method
 ProfileSchema.statics.signup = async function (email, username, password) {
+  email = `${username}`;
   // Validate that email and pw are not empty strings
-  if (!email || !password) {
+  if (email.length < 1 || username.length < 1) {
     throw Error('All feilds must be filled');
   }
-  // Validate email
-  if (!validator.isEmail(email)) {
-    throw Error('Email is not valid');
-  }
-  // Validate that pw is a strong pw
+
+  // Validate that pw is a "strong" pw (not stringent on this for now)
   if (password.length < 6) {
     throw Error('Password must be at least 6 characters');
   }
@@ -97,7 +95,7 @@ ProfileSchema.statics.signup = async function (email, username, password) {
   // Ensure email provided is not already in use
   const exists = await this.findOne({ email });
   if (exists) {
-    throw Error('This email is already in use');
+    throw Error('Already in use, try again.');
   }
 
   // Ensure username provided is not already in use
@@ -120,14 +118,14 @@ ProfileSchema.statics.signup = async function (email, username, password) {
 // static login method
 ProfileSchema.statics.login = async function (email, password) {
   // Validate that email and pw are not empty strings
-  if (!email || !password) {
+  if (email.length < 1 || password.length < 1) {
     throw Error('All feilds must be filled');
   }
 
   // Check if the email exists in the database
   const user = await this.findOne({ email });
   if (!user) {
-    throw Error('Incorrect email');
+    throw Error('Incorrect credentials');
   }
 
   // Email exists, now validate if given password matches hashed password
