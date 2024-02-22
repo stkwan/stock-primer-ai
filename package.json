@@ -25,7 +25,8 @@
     "ws": "^8.13.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "mongodb": "^5.8.0"
   },
   "engines": {
     "node": "18.x"
