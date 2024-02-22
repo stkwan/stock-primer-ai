@@ -17,6 +17,7 @@
     "express": "^4.18.2",
     "finnhub": "^1.2.17",
     "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.8.0",
     "mongoose": "^7.4.0",
     "semver": "^7.6.0",
     "validator": "^13.9.0",
