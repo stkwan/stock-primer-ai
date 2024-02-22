@@ -26,7 +26,7 @@ npm run app
 
 ## Usage
 1. From the landing page, click "Demo" to skip signing up.
-2. Click the orange "+ Trade" button to start a trade.
+2. Click the "+ Trade" button to start a trade.
 3. Enter a symbol such as "TSLA" and enter your trade details.
 4. Click submit.
 
