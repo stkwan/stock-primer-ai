@@ -10,15 +10,15 @@ To quickly begin using the application, visit the production website here:
 
 [https://primestock.vercel.app/](https://primestock.vercel.app/)
 
-OR clone the repo and,
+OR
 
-1. Install dependencies, enter in the command line:
+1. To install dependencies, enter in the command line:
 
 ```
 npm install
 ```
 
-2. Run the application locally, enter in the command line:
+2. To run the application locally, enter in the command line:
 
 ```
 npm run app
