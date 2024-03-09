@@ -6,7 +6,7 @@ PrimeStock is a web application that simulates real-time stock trading. It inclu
 
 ## Quick Start
 
-To quickly begin using the application, visit the production website here:
+* To quickly begin using the application, visit the production website here:
 
 [https://primestock.vercel.app/](https://primestock.vercel.app/)
 
@@ -18,7 +18,7 @@ OR
 npm install
 ```
 
-To run the application locally, enter in the command line:
+* To run the application locally, enter in the command line:
 
 ```
 npm run app
