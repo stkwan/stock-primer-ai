@@ -2,7 +2,7 @@
 
 ## Description
 
-More than just a stock trading simulator! PrimeStock is loaded with advanced features to help you level up.
+PrimeStock is a web application that simulates real-time stock trading. It includes a variety of fun features to enhance the trading experience.
 
 ## Quick Start
 
